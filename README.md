@@ -1,4 +1,5 @@
 # ContactsStretchProblem
+
 A stretch problem for DevMountain students designed to help them implement various features of CloudKit
 
 # Creating and saving CKRecords
@@ -11,10 +12,10 @@ A stretch problem for DevMountain students designed to help them implement vario
 
 - Create a 'cloudKitRecord' computed property in your model class that will initialize a CKRecord, and set its values to the values of your model so that it is a representation of it in the form of a CKRecord (think 'dictionaryRepresentation' from unit 3)
 
-- Save the record to CloudKit. Check on the CloudKit dashboard to make sure the record was successfully saved. (Note: You may have to go to the 'default zone' in the dashboard and click the 'Add Record ID Query Index')
+- Save the record to CloudKit. Check on the CloudKit Dashboard to make sure the record was successfully saved. (Note: You may have to go to the 'default zone' in the Dashboard and click the 'Add Record ID Query Index')
 
 # Black Diamonds
 
-- Write your own function from scratch to save the CKRecord (don't use the CloudKitManager functions)
+- Save the cloudKitRecord without using or looking at the CloudKitManager functions (Look at the documentation)
 
-- Implement a UIImagePickerController to a contact photo. Update your model and cloudKitRecord to reflect the changes. 
+- Implement a UIImagePickerController to select a contact photo. Update your model and cloudKitRecord to reflect the changes. 
