@@ -33,3 +33,17 @@ A stretch problem for DevMountain students designed to help them implement vario
 # Black Diamonds
 
 - If you have time, experiment with NSPredicates to see how you can use them to fetch only specific records. 
+
+# Part 3: Subscriptions
+
+- In your model controller, create a function that will create, set up, and save a subscription. (Note: In iOS 10, subcriptions are now CKQuerySubscription. Pre-iOS 10 subscriptions are CKSubscriptions)
+
+- In the App Delegate, register and request authorization for User Notification Settings. (When writing for iOS 10, use the new UNUserNotificationCenter. Otherwise, create UIUserNotifificationSettings)
+
+- Turn on the 'Remote Notifications' capability in the Background Modes section of the capabilities tab.
+
+- Call your subscription function.
+
+- Run the project on the simulator and a physical device to make sure the subscriptions work (Note: The simulator is bad at receiving notifications if at all. Create the contact on the simulator, then look on your physical device to see if it either hits the App Delegate didReceiveRemoteNotification function, or gets a banner notification.)
+
+# Black Diamonds
