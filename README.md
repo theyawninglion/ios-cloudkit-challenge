@@ -1,49 +1,28 @@
-# ContactsStretchProblem
+# Instructions for Unit 4 Challenge
 
-A stretch problem for DevMountain students designed to help them implement various features of CloudKit
+This challenge is intended to assess your ability to build applications that sync data between devices using CloudKit. It covers the following concepts taught in Unit 4:
 
-# Part 1: Creating and saving CKRecords
+- CloudKit setup (provisioning, CloudKit containers, etc.)
+- Conversion from application-specific model objects to/from CKRecord
+- Use of CKQuery to fetch data from CloudKit
+- Proper separation of concerns. CloudKit restricted to the model/model controller layer.
+- Ability to add records to, delete records from, and update records on CloudKit.
 
-- Begin by making a new project (make sure you enable CloudKit in the capabilities tab of your project file)
+The included screen recording demonstrates the application you are to create for this challenge. Note the following requirements:
 
-- Create a simple ViewController with UITextFields to have the user enter a name, a phone number, and email address, and a button to save the contact.
+1. Initial screen shows a list of contact names.
+2. Tapping the plus button in the top right corner brings up a screen with text fields to enter a name, phone number, and email address for a new contact. The user should required to enter a name. Phone number and email address fields may be left blank.
+3. Tapping the Save button saves the new contact and returns to the list of contacts.
+4. Tapping on a contact name in the list shows a detail view **which allows editing** the existing contact.
+5. If the app is killed and restarted, previously saved contacts must continue to be shown.
+6. If the app is launched on another device signed into the same iCloud account, it must also show the users' contacts.
 
-- Create a 'Contact' model class representing a person's contact information
+Black Diamonds:
+- Add support for deleting contacts by swiping on them in the list view.
+- Use CKSubscription to make it so that data is automatically updated on one device when it is edited on another.
+- Add local persistence so that users without a network connection can see their existing contacts.
+- Add a search bar to the contacts list view to allow the user to search for specific contacts.
 
-- Create a 'cloudKitRecord' computed property in your model class that will initialize a CKRecord, and set its values to the values of your model so that it is a representation of it in the form of a CKRecord (think 'dictionaryRepresentation' from Unit 3)
+**Note**: You **may not** use the CloudKit manager class from Timeline. Please write a small, focused CloudKitManager class for this challenge.
 
-- Save the record to CloudKit. Check on the CloudKit Dashboard to make sure the record was successfully saved. (Note: You may have to go to the 'default zone' in the Dashboard and click the 'Add Record ID Query Index')
-
-# Black Diamonds
-
-- Save the cloudKitRecord without using or looking at the CloudKitManager functions. (Look at the documentation)
-
-- Implement a UIImagePickerController to select a contact photo. Update your model and cloudKitRecord to reflect the changes. 
-
-# Part 2: Fetching Records
-
-- Create a TableViewController to display the contacts you will fetch from CloudKit. (Note: You may segue to this TableViewController however you wish)
-
-- In your model controller, create a function that will fetch all stored contacts on CloudKit. (If you choose to create it without the CloudKitManager, there is more than one way to fetch records from CloudKit.)
-
-- In the same function, initialize new contact objects from the records you just fetched, and assign them to a variable that is accessible to the TableViewController you just made. 
-
-- Populate the TableViewController.
-
-# Black Diamonds
-
-- If you have time, experiment with NSPredicates to see how you can use them to fetch only specific records. 
-
-# Part 3: Subscriptions
-
-- In your model controller, create a function that will create, set up, and save a subscription. (Note: In iOS 10, subcriptions are now CKQuerySubscription. Pre-iOS 10 subscriptions are CKSubscriptions)
-
-- In the App Delegate, register and request authorization for User Notification Settings. (When writing for iOS 10, use the new UNUserNotificationCenter. Otherwise, create UIUserNotifificationSettings)
-
-- Turn on the 'Remote Notifications' capability in the Background Modes section of the capabilities tab.
-
-- Call your subscription function.
-
-- Run the project on the simulator and a physical device to make sure the subscriptions work (Note: The simulator is bad at receiving notifications if at all. Create the contact on the simulator, then look on your physical device to see if it either hits the App Delegate didReceiveRemoteNotification function, or gets a banner notification.)
-
-# Black Diamonds
+You will have 3 hours and 30 minutes to complete this challenge.
