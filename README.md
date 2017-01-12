@@ -21,7 +21,7 @@ The included screen recording demonstrates the application you are to create for
 5. If the app is killed and restarted, previously saved contacts must continue to be shown.
 6. If the app is launched on another device signed into the same iCloud account, it must also show the users' contacts.
 
-# Black Diamonds:
+### Black Diamonds:
 - Add support for deleting contacts by swiping on them in the list view.
 - Use CKSubscription to make it so that data is automatically updated on one device when it is edited on another.
 - Add local persistence so that users without a network connection can see their existing contacts.
