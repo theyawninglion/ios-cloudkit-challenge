@@ -16,7 +16,7 @@ The included screen recording demonstrates the application you are to create for
 
 1. Initial screen shows a list of contact names.
 2. Tapping the plus button in the top right corner brings up a screen with text fields to enter a name, phone number, and email address for a new contact. The user should required to enter a name. Phone number and email address fields may be left blank.
-3. Tapping the Save button saves the new contact and returns to the list of contacts.
+3. Tapping the Save button saves the new contact and returns to the list of contacts, where the newly created contact appears.
 4. Tapping on a contact name in the list shows a detail view **which allows editing** the existing contact.
 5. If the app is killed and restarted, previously saved contacts must continue to be shown.
 6. If the app is launched on another device signed into the same iCloud account, it must also show the users' contacts.
