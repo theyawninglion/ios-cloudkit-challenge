@@ -12,9 +12,9 @@ import CloudKit
 class Contact {
     
     //MARK: - property keys
-    private let nameKey = "name"
-    private let phoneNumberKey = "phoneNumber"
-    private let emailKey = "email"
+    static let nameKey = "name"
+    static let phoneNumberKey = "phoneNumber"
+    static let emailKey = "email"
     
     //MARK: - properties
     let name: String

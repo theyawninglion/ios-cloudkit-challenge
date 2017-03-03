@@ -17,6 +17,15 @@ class ContactsListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        CloudKitManager.fetchAllContactsFromCloudKit { (contacts) in
+            
+            self.contacts = contacts
+        DispatchQueue.main.async {
+
+            tableView.reloadData()
+        }
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +35,12 @@ class ContactsListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count
+        return ContactController.shared.contacts.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
-        let contact = contacts[indexPath.row]
+        let contact = ContactController.shared.contacts[indexPath.row]
         
         cell.textLabel?.text = contact.name
         
@@ -53,7 +62,7 @@ class ContactsListTableViewController: UITableViewController {
         
         if segue.identifier == "toContactDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow, let contactDetailVC = segue.destination as? ContactDetailViewController else { return }
-            let selectedContact = contacts[indexPath.row]
+            let selectedContact = ContactController.shared.contacts[indexPath.row]
             contactDetailVC.contact = selectedContact
         }
         

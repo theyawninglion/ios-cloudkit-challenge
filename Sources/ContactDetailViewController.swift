@@ -23,7 +23,21 @@ class ContactDetailViewController: UIViewController {
     }
 
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let name = nameTextField.text,
+            let phoneNumber = phoneNumberTextField.text as? Int,
+            let email = emailTextField.text
+            else { return }
+        
+        ContactController.shared.createContact(name: name, phoneNumber: phoneNumber, email: email) { (_) in
+            DispatchQueue.main.async {
+                self.nameTextField.resignFirstResponder()
+                self.phoneNumberTextField.resignFirstResponder()
+                self.emailTextField.resignFirstResponder()
+            }
+        }
+        let _ = self.navigationController?.popViewController(animated: true)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
