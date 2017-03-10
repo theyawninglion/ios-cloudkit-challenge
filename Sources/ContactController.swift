@@ -28,11 +28,12 @@ class ContactController {
         }
         
     }
-    func fetchFromCloudKit(){
+    func fetchRecordsFromCloudKit(completion: @escaping () -> Void){
         
         cloudKitManager.fetchRecords(type: Contact.typeKey) { (records) in
             let contacts = records.flatMap({ Contact(record: $0) })
             self.contacts = contacts
+            completion()
         }
     }
     func delete(recordID: CKRecordID){

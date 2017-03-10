@@ -36,7 +36,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="U1n-Lb-oO9" kind="show" identifier="toContactDetail" id="VMV-rX-NEb"/>
+                                    <segue destination="U1n-Lb-oO9" kind="show" identifier="toContactDetails" id="VMV-rX-NEb"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -48,7 +48,7 @@
                     <navigationItem key="navigationItem" title="Contacts" id="eNX-Q7-LTb">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="mmU-P3-bad">
                             <connections>
-                                <segue destination="U1n-Lb-oO9" kind="show" id="Ebe-gd-3Dk"/>
+                                <segue destination="U1n-Lb-oO9" kind="show" id="Ghe-ed-fiX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -200,7 +200,6 @@
                         <outlet property="emailTextField" destination="3u4-cl-iMj" id="AKM-Ff-xd9"/>
                         <outlet property="nameTextField" destination="fHR-gO-ZxZ" id="Rh9-Nn-NCv"/>
                         <outlet property="phoneTextField" destination="LdF-hl-IVc" id="EWu-EN-PQc"/>
-                        <outlet property="saveButtonTapped" destination="62p-sy-KNp" id="D4T-gN-DFS"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xob-Gc-qTX" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -19,12 +19,12 @@ class Contact {
     
     //MARK: - properties
     let name: String
-    let email: String?
-    let phoneNumber: Int?
+    let email: String
+    let phoneNumber: Int
     let recordID: CKRecordID? = nil
     
     //MARK: -  member initializer
-    init(name: String, email: String, phoneNumber: Int){
+    init(name: String, email: String = "", phoneNumber: Int){
         
         self.name = name
         self.email = email
