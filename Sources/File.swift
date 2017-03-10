@@ -1,8 +1,8 @@
 //
-//  CloudKitManager.swift
+//  File.swift
 //  Contacts
 //
-//  Created by Taylor Phillips on 3/3/17.
+//  Created by Taylor Phillips on 3/5/17.
 //  Copyright © 2017 Dev Mountain. All rights reserved.
 //
 
@@ -20,7 +20,8 @@ class CloudKitManager {
     
     //MARK: - Properties
     
-        let privateDatabase = CKContainer.default().privateCloudDatabase
+    let publicDatabase = CKContainer.default().publicCloudDatabase
+    let privateDatabase = CKContainer.default().privateCloudDatabase
     
     // check CloudKit availability
     init() {
@@ -29,7 +30,70 @@ class CloudKitManager {
     }
     
     
-      // MARK: - Fetch Records
+    // MARK: - User Info Discovery
+    
+    func fetchLoggedInUserRecord(_ completion: ((_ record: CKRecord?, _ error: Error? ) -> Void)?){
+        
+        CKContainer.default().fetchUserRecordID { (recordID, error) in
+            
+            if let error = error,
+                let completion = completion {
+                completion(nil, error)
+            }
+            
+            if let recordID = recordID,
+                let completion = completion {
+                self.fetchRecord(withID: recordID, completion: completion)
+            }
+        }
+        
+    }
+    
+    func fetchUsername(for recordID: CKRecordID, completion: @escaping ((_ givenName: String?, _ familyName: String?) -> Void) = { _,_ in }){
+        
+        let recordInfo = CKUserIdentityLookupInfo(userRecordID: recordID)
+        let operation = CKDiscoverUserIdentitiesOperation(userIdentityLookupInfos: [recordInfo])
+        
+        var userIdentities = [CKUserIdentity]()
+        operation.userIdentityDiscoveredBlock = { (userIdentity, _) in
+            userIdentities.append(userIdentity)
+        }
+        operation.discoverUserIdentitiesCompletionBlock = { (error) in
+            if let error = error {
+                NSLog("Error getting usernae from record ID: \(error)")
+                completion(nil, nil)
+                return
+            }
+            let nameComponents = userIdentities.first?.nameComponents
+            completion(nameComponents?.givenName, nameComponents?.familyName)
+        }
+        CKContainer.default().add(operation)
+    }
+    
+    func fetchAllDiscoverableUsers(completion: @escaping ((_ userInfoRecords: [CKUserIdentity]?) -> Void) = { _ in }){
+        let operation = CKDiscoverAllUserIdentitiesOperation()
+        
+        var userIdentities = [CKUserIdentity]()
+        operation.userIdentityDiscoveredBlock = { userIdentities.append($0) }
+        operation.discoverAllUserIdentitiesCompletionBlock = { error in
+            if let error = error {
+                NSLog("Error discovering all user identities: \(error)")
+                completion(nil)
+                return
+            }
+            completion(userIdentities)
+        }
+        CKContainer.default().add(operation)
+    }
+    
+    // MARK: - Fetch Records
+    
+    func fetchRecord(withID recordID: CKRecordID, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?){
+        
+        publicDatabase.fetch(withRecordID: recordID) { (record, error) in
+            completion?(record, error)
+        }
+    }
     
     func fetchRecordsWithType(_ type: String,
                               predicate: NSPredicate = NSPredicate(value: true),
@@ -53,22 +117,41 @@ class CloudKitManager {
                 continuedQueryOperation.recordFetchedBlock = perRecordBlock
                 continuedQueryOperation.queryCompletionBlock = queryCompletionBlock
                 
-                self.privateDatabase.add(continuedQueryOperation)
+                self.publicDatabase.add(continuedQueryOperation)
             } else {
                 completion?(fetchedRecords, error)
             }
         }
         queryOperation.queryCompletionBlock = queryCompletionBlock
-        self.privateDatabase.add(queryOperation)
+        self.publicDatabase.add(queryOperation)
     }
-
     
     
+    func fetchCurrentUserRecords(_ type: String, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?){
+        fetchLoggedInUserRecord { (record, error) in
+            if let record = record {
+                let predicate = NSPredicate(format: "%K == %@", argumentArray: [CreatorUserRecordIDKey, record.recordID])
+                
+                self.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil, completion: completion)
+            }
+        }
+    }
+    
+    func fetchRecordsFromDateRange(_ type: String, recordType: String, fromDate: Date, toDate: Date, completion: ((_ records: [CKRecord]?, _ error: Error?) -> Void)?){
+        
+        let startDatePredicate = NSPredicate(format: "%K > %@", argumentArray: [CreationDateKey, fromDate])
+        let endDatePredicate = NSPredicate(format: "%K < %@", argumentArray: [CreationDateKey, toDate])
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [startDatePredicate, endDatePredicate])
+        
+        self.fetchRecordsWithType(type, predicate: predicate, recordFetchedBlock: nil) { (records, error) in
+            completion?(records, error)
+        }
+    }
     
     // MARK: - Delete Records
     
     func deleteRecordWithID(_ recordID: CKRecordID, completion: ((_ recordID: CKRecordID?, _ error: Error?) -> Void)?) {
-        privateDatabase.delete(withRecordID: recordID) { (recordID, error) in
+        publicDatabase.delete(withRecordID: recordID) { (recordID, error) in
             completion?(recordID, error)
         }
     }
@@ -78,7 +161,7 @@ class CloudKitManager {
         operation.savePolicy = .ifServerRecordUnchanged
         
         operation.modifyRecordsCompletionBlock = completion
-        privateDatabase.add(operation)
+        publicDatabase.add(operation)
     }
     
     
@@ -92,7 +175,7 @@ class CloudKitManager {
     
     func saveRecord(_ record: CKRecord, completion: ((_ record: CKRecord?, _ error: Error?) -> Void)?){
         
-        privateDatabase.save(record) { (record, error) in
+        publicDatabase.save(record) { (record, error) in
             completion?(record, error)
         }
         
@@ -107,10 +190,35 @@ class CloudKitManager {
         operation.modifyRecordsCompletionBlock = { (records, recordIDs, error) -> Void in
             (completion?(records, error))!
         }
-        privateDatabase.add(operation)
+        publicDatabase.add(operation)
         
     }
     
+    //MARK: - Subscriptions
+    
+    func subscribe(_ type: String, predicate: NSPredicate, subscriptonID: String, contentAvailable: Bool, alertBody: String? = nil, desiredKeys: [String]? = nil, options: CKQuerySubscriptionOptions, completion: ((_ subscription: CKSubscription?, _ error: Error?) -> Void)?) {
+        let  subscription = CKQuerySubscription(recordType: type, predicate: predicate, subscriptionID: subscriptonID, options: options)
+        let notificationInfo = CKNotificationInfo()
+        notificationInfo.alertBody = alertBody
+        notificationInfo.shouldSendContentAvailable = contentAvailable
+        notificationInfo.desiredKeys = desiredKeys
+        
+        subscription.notificationInfo = notificationInfo
+        publicDatabase.save(subscription) { (subscription, error) in
+            completion?(subscription, error)
+        }
+    }
+    
+    func unsubscribe(_ subscriptionID: String, completion: ((_ subscriptionID: String?, _ error: Error?) -> Void)?) {
+        publicDatabase.delete(withSubscriptionID: subscriptionID) { (subscriptionID, error) in
+            completion?(subscriptionID, error)
+        }
+    }
+    func fetchSubscription(_ subscriptionID: String, completion: ((_ subscription: CKSubscription?, _ error: Error?) -> Void)?) {
+        publicDatabase.fetch(withSubscriptionID: subscriptionID) { (subscription, error) in
+            completion?(subscription, error)
+        }
+    }
     
     
     // MARK: - CloudKit Availability

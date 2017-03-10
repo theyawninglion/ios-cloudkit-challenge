@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5A971A381E69CEAB00599CC8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A971A371E69CEAB00599CC8 /* CloudKit.framework */; };
-		5A971A3E1E69D4A500599CC8 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A971A3D1E69D4A500599CC8 /* CloudKitManager.swift */; };
-		5A971A401E69D50000599CC8 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A971A3F1E69D50000599CC8 /* Contact.swift */; };
-		5A971A421E69DCB600599CC8 /* ContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A971A411E69DCB600599CC8 /* ContactController.swift */; };
-		5A971A441E69DD5C00599CC8 /* ContactsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A971A431E69DD5C00599CC8 /* ContactsListTableViewController.swift */; };
-		5A971A461E69DD8A00599CC8 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A971A451E69DD8A00599CC8 /* ContactDetailViewController.swift */; };
 		9DF292691E26B417005D7FFE /* ContactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF292681E26B417005D7FFE /* ContactsTests.swift */; };
 		9DF292741E26B417005D7FFE /* ContactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF292731E26B417005D7FFE /* ContactsUITests.swift */; };
 		9DF2928B1E26B43A005D7FFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DF292821E26B43A005D7FFE /* Assets.xcassets */; };
@@ -41,11 +36,6 @@
 /* Begin PBXFileReference section */
 		5A971A351E69CEA900599CC8 /* Contacts.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Contacts.entitlements; path = ../Contacts.entitlements; sourceTree = "<group>"; };
 		5A971A371E69CEAB00599CC8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		5A971A3D1E69D4A500599CC8 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
-		5A971A3F1E69D50000599CC8 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		5A971A411E69DCB600599CC8 /* ContactController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactController.swift; sourceTree = "<group>"; };
-		5A971A431E69DD5C00599CC8 /* ContactsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsListTableViewController.swift; sourceTree = "<group>"; };
-		5A971A451E69DD8A00599CC8 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		9DF292501E26B416005D7FFE /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF292641E26B417005D7FFE /* ContactsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DF292681E26B417005D7FFE /* ContactsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTests.swift; sourceTree = "<group>"; };
@@ -97,7 +87,6 @@
 		5A971A391E69D43D00599CC8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5A971A3F1E69D50000599CC8 /* Contact.swift */,
 				9DF292891E26B43A005D7FFE /* AppDelegate.swift */,
 			);
 			name = Model;
@@ -106,7 +95,6 @@
 		5A971A3A1E69D44E00599CC8 /* ModelController */ = {
 			isa = PBXGroup;
 			children = (
-				5A971A411E69DCB600599CC8 /* ContactController.swift */,
 			);
 			name = ModelController;
 			sourceTree = "<group>";
@@ -114,8 +102,6 @@
 		5A971A3B1E69D45C00599CC8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5A971A431E69DD5C00599CC8 /* ContactsListTableViewController.swift */,
-				5A971A451E69DD8A00599CC8 /* ContactDetailViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -123,7 +109,6 @@
 		5A971A3C1E69D48B00599CC8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5A971A3D1E69D4A500599CC8 /* CloudKitManager.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -347,11 +332,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A971A401E69D50000599CC8 /* Contact.swift in Sources */,
-				5A971A3E1E69D4A500599CC8 /* CloudKitManager.swift in Sources */,
-				5A971A421E69DCB600599CC8 /* ContactController.swift in Sources */,
-				5A971A441E69DD5C00599CC8 /* ContactsListTableViewController.swift in Sources */,
-				5A971A461E69DD8A00599CC8 /* ContactDetailViewController.swift in Sources */,
 				9DF2928F1E26B43A005D7FFE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

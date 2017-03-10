@@ -27,12 +27,23 @@ class ContactController {
         }
     }
     
+    func fetchAllContactsFromCloudKit(completion: @ escaping ([Contact]) -> Void) {
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "Contact", predicate: predicate)
+        privateDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            guard let records = records else { return }
+            let contacts = records.flatMap({Contact(cloudKitRecord: $0) })
+            completion(contacts)
+        }
+    }
 
-    func refreshData(completion: @escaping ((Error?) -> Void) = { _ in}) {
+    
+
+    func refreshContacts(completion: @escaping ((Error?) -> Void) = { _ in}) {
         
         let sortDescriptor = [NSSortDescriptor(key: Contact.nameKey, ascending: false)]
         
-        cloudKitManage
+        cloudKitManager.fetchRecordsWithType(<#T##type: String##String#>, predicate: <#T##NSPredicate#>, recordFetchedBlock: <#T##((CKRecord) -> Void)?##((CKRecord) -> Void)?##(CKRecord) -> Void#>, completion: <#T##(([CKRecord]?, Error?) -> Void)?##(([CKRecord]?, Error?) -> Void)?##([CKRecord]?, Error?) -> Void#>)
     }
     
 }
