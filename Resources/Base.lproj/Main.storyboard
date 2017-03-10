@@ -13,7 +13,7 @@
         <!--Contacts-->
         <scene sceneID="8j9-hy-y0V">
             <objects>
-                <tableViewController id="28o-we-gKW" sceneMemberID="viewController">
+                <tableViewController id="28o-we-gKW" customClass="ContactListTableViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="iNP-Fo-XPk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,7 +60,7 @@
         <!--Contact Details-->
         <scene sceneID="kY7-gU-nQg">
             <objects>
-                <tableViewController id="U1n-Lb-oO9" sceneMemberID="viewController">
+                <tableViewController id="U1n-Lb-oO9" customClass="ContactDetailsTableViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="kpy-Es-ttP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,8 +190,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contact Details" id="5G5-Ly-59q">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="62p-sy-KNp"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="62p-sy-KNp">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="U1n-Lb-oO9" id="VWj-2r-fos"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="emailTextField" destination="3u4-cl-iMj" id="AKM-Ff-xd9"/>
+                        <outlet property="nameTextField" destination="fHR-gO-ZxZ" id="Rh9-Nn-NCv"/>
+                        <outlet property="phoneTextField" destination="LdF-hl-IVc" id="EWu-EN-PQc"/>
+                        <outlet property="saveButtonTapped" destination="62p-sy-KNp" id="D4T-gN-DFS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xob-Gc-qTX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

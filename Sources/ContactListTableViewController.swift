@@ -13,6 +13,9 @@ class ContactListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         
     }
     
@@ -24,12 +27,16 @@ class ContactListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
-        
+        let contact = ContactController.shared.contacts[indexPath.row]
+        cell.textLabel?.text = contact.name
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+//            ContactController.shared.contacts[indexPath.row]
+//            
+//            ContactController.shared.delete(recordID: <#T##CKRecordID#>)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -37,7 +44,11 @@ class ContactListTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toContactDetail" {
+            guard let indexPath = tableView.indexPathForSelectedRow, let contactDetailTVC = segue.destination as? ContactDetailsTableViewController else { return }
+            let contact = ContactController.shared.contacts[indexPath.row]
+            contactDetailTVC.contact = contact
+            
+        }
     }
 }
