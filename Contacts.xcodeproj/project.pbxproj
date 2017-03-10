@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A34DDA91E730BED001D9BAE /* ContactListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34DDA81E730BED001D9BAE /* ContactListTableViewController.swift */; };
+		5A34DDAB1E730C00001D9BAE /* ContactDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34DDAA1E730C00001D9BAE /* ContactDetailsTableViewController.swift */; };
+		5A34DDAD1E730CB9001D9BAE /* ContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34DDAC1E730CB9001D9BAE /* ContactController.swift */; };
+		5A34DDAF1E730CDA001D9BAE /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34DDAE1E730CDA001D9BAE /* Contact.swift */; };
+		5A34DDB11E730CF1001D9BAE /* CloudKitManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34DDB01E730CF1001D9BAE /* CloudKitManger.swift */; };
 		5A971A381E69CEAB00599CC8 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A971A371E69CEAB00599CC8 /* CloudKit.framework */; };
 		9DF292691E26B417005D7FFE /* ContactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF292681E26B417005D7FFE /* ContactsTests.swift */; };
 		9DF292741E26B417005D7FFE /* ContactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF292731E26B417005D7FFE /* ContactsUITests.swift */; };
@@ -34,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A34DDA81E730BED001D9BAE /* ContactListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListTableViewController.swift; sourceTree = "<group>"; };
+		5A34DDAA1E730C00001D9BAE /* ContactDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailsTableViewController.swift; sourceTree = "<group>"; };
+		5A34DDAC1E730CB9001D9BAE /* ContactController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactController.swift; sourceTree = "<group>"; };
+		5A34DDAE1E730CDA001D9BAE /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		5A34DDB01E730CF1001D9BAE /* CloudKitManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManger.swift; sourceTree = "<group>"; };
 		5A971A351E69CEA900599CC8 /* Contacts.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Contacts.entitlements; path = ../Contacts.entitlements; sourceTree = "<group>"; };
 		5A971A371E69CEAB00599CC8 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9DF292501E26B416005D7FFE /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +97,7 @@
 		5A971A391E69D43D00599CC8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9DF292891E26B43A005D7FFE /* AppDelegate.swift */,
+				5A34DDAE1E730CDA001D9BAE /* Contact.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -95,6 +105,7 @@
 		5A971A3A1E69D44E00599CC8 /* ModelController */ = {
 			isa = PBXGroup;
 			children = (
+				5A34DDAC1E730CB9001D9BAE /* ContactController.swift */,
 			);
 			name = ModelController;
 			sourceTree = "<group>";
@@ -102,6 +113,8 @@
 		5A971A3B1E69D45C00599CC8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5A34DDA81E730BED001D9BAE /* ContactListTableViewController.swift */,
+				5A34DDAA1E730C00001D9BAE /* ContactDetailsTableViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -109,6 +122,8 @@
 		5A971A3C1E69D48B00599CC8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9DF292891E26B43A005D7FFE /* AppDelegate.swift */,
+				5A34DDB01E730CF1001D9BAE /* CloudKitManger.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -332,7 +347,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A34DDB11E730CF1001D9BAE /* CloudKitManger.swift in Sources */,
+				5A34DDA91E730BED001D9BAE /* ContactListTableViewController.swift in Sources */,
 				9DF2928F1E26B43A005D7FFE /* AppDelegate.swift in Sources */,
+				5A34DDAF1E730CDA001D9BAE /* Contact.swift in Sources */,
+				5A34DDAD1E730CB9001D9BAE /* ContactController.swift in Sources */,
+				5A34DDAB1E730C00001D9BAE /* ContactDetailsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

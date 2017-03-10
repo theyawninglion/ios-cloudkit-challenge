@@ -2,7 +2,7 @@
 //  Contact.swift
 //  Contacts
 //
-//  Created by Taylor Phillips on 3/3/17.
+//  Created by Taylor Phillips on 3/10/17.
 //  Copyright © 2017 Dev Mountain. All rights reserved.
 //
 
@@ -11,47 +11,47 @@ import CloudKit
 
 class Contact {
     
-    //MARK: - property keys
+    //MARK: - keys
+    static let typeKey = "Contact"
     static let nameKey = "name"
-    static let phoneNumberKey = "phoneNumber"
     static let emailKey = "email"
+    static let phoneNumberKey = "phoneNumber"
     
     //MARK: - properties
     let name: String
-    let phoneNumber: Int?
     let email: String?
-    var cloudKitRecordID: CKRecordID?
+    let phoneNumber: Int?
+    let recordID: CKRecordID? = nil
     
-    //MARK: - initalizers
-    
-    init(name: String, phoneNumber: Int? = nil, email: String? = nil) {
+    //MARK: -  member initializer
+    init(name: String, email: String, phoneNumber: Int){
+        
         self.name = name
-        self.phoneNumber = phoneNumber
         self.email = email
+        self.phoneNumber = phoneNumber
     }
     
-    init?(cloudKitRecord: CKRecord) {
-        guard let name = cloudKitRecord[nameKey] as? String,
-        let phoneNumber = cloudKitRecord[phoneNumberKey] as? Int,
-        let email = cloudKitRecord[emailKey] as? String
+    //MARK: - failable initializer ** fetch **
+    init?(record: CKRecord){
+        guard let name = record[Contact.nameKey] as? String,
+        let email = record[Contact.emailKey] as? String,
+        let phoneNumber = record[Contact.phoneNumberKey] as? Int
             else { return nil }
+        
         self.name = name
-        self.phoneNumber = phoneNumber
         self.email = email
-        self.cloudKitRecordID = cloudKitRecord.recordID
+        self.phoneNumber = phoneNumber
     }
+}
+//MARK: - extention on CKRecord ** save **
+
+extension CKRecord {
     
-    //MARK: - setter
-    
-    var cloudKitRecord: CKRecord {
-        let recordID: CKRecordID = cloudKitRecordID ?? CKRecordID(recordName: UUID().uuidString)
-        
-        let record = CKRecord(recordType: "Contact", recordID: recordID)
-        record.setValue(name, forKey: nameKey)
-        record.setValue(phoneNumber, forKey: phoneNumberKey)
-        record.setValue(email, forKey: emailKey)
-        
-        return record
+    convenience init(contact: Contact) {
+        let recordID = contact.recordID ?? CKRecordID(recordName: UUID().uuidString)
+        self.init(recordType: Contact.typeKey, recordID: recordID)
+        self.setValue(contact.name, forKey: Contact.nameKey)
+        self.setValue(contact.email, forKey: Contact.emailKey)
+        self.setValue(contact.phoneNumber, forKey: Contact.phoneNumberKey)
     }
-    
 }

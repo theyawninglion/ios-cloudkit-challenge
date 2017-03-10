@@ -1,5 +1,5 @@
 //
-//  ContactController.swift
+//  CloudKitManger.swift
 //  Contacts
 //
 //  Created by Taylor Phillips on 3/10/17.
@@ -7,3 +7,4 @@
 //
 
 import Foundation
+import CloudKit
