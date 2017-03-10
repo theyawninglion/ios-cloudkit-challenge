@@ -43,6 +43,10 @@ class CloudKitMangager {
         }
         
     }
+    func modifyRecord(record: CKRecord, completion: () -> Void){
+        // FIXME: - modifyRecord
+//        privateDataBase.add(<#T##operation: CKDatabaseOperation##CKDatabaseOperation#>)
+    }
     
     func deleteRecord(recordID: CKRecordID, completion: ((_ recordID: CKRecordID?, _ error: Error?) -> Void)?) {
         privateDataBase.delete(withRecordID: recordID) { (recordID, error) in
